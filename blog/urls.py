@@ -1,14 +1,11 @@
-from django.contrib import admin
-from django.urls import path, include
-from rest_framework import routers
-
 from app import views
-
-router = routers.DefaultRouter()
-router.register(r'authors', views.AuthorList)
-router.register(r'groups', views.RetrievenAuthorView)
+from django.contrib import admin
+from django.urls import path
 
 urlpatterns = (
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('authors/', views.AuthorList.as_view()),
+    path('authors/<int:pk>', views.RetrieveAuthorView.as_view()),
+    path('books/', views.BookList.as_view()),
+    path('books/<int:pk>', views.RetrieveBookView.as_view())
 )
